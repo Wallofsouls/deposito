@@ -1,0 +1,125 @@
+package cuentas;
+
+/**
+ *
+ * @author Jonathan J. Wall Lozano
+ */
+public class CCuenta {
+
+    private String nombre;
+    private String cuenta;
+    private double saldo;
+    private double tipoInteres;
+
+    public CCuenta() {
+    }
+
+    public CCuenta(String nom, String cue, double sal, double tipoInt) {
+        this.nombre = nom;
+        this.cuenta = cue;
+        this.saldo = sal;
+        this.tipoInteres = tipoInt;
+    }
+
+    //Métodos getter, encapsulan los atributos
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getCuenta() {
+        return cuenta;
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public double getTipoInterés() {
+        return tipoInteres;
+    }
+
+    //Métodos setter, encapsulan los atributos
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setCuenta(String cuenta) {
+        this.cuenta = cuenta;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+
+    public void setTipoInterés(double tipoInterés) {
+        this.tipoInteres = tipoInterés;
+    }
+
+    public double estado() {
+        return saldo;
+    }
+
+    /**
+     * Método que realiza un ingreso en el saldo de la cuenta
+     *
+     * @param cantidad pide una cantidad numérica que será sumada al atributo
+     * saldo de los objetos de la clase CCuenta que creemos
+     *
+     * @throws Exception en caso de que la cantidad sea menor a 0 lanzará la
+     * excepción indicando que la operación de ingreso no puede realizarse
+     * debido a que la cantidad es negativa
+     *
+     */
+    public void ingresar(double cantidad) throws Exception {
+        if (cantidad
+                < 0) {
+            throw new Exception("No se puede ingresar una cantidad negativa");
+        }
+        saldo = saldo + cantidad;
+    }
+
+    /**
+     * Método que realiza una extracción del saldo de la cuenta
+     *
+     * @param cantidad pide una cantidad numérica que será restada del atributo
+     * saldo de los objetos de la clase CCuenta que creemos
+     *
+     * @throws Exception en caso de que el salario sea menor o igual a 0 lanzará
+     * la excepción indicando que la operación de retirada no puede realizarse
+     */
+    public void retirar(double cantidad) throws Exception {
+        if (cantidad <= 0) {
+            throw new Exception("No se puede retirar una cantidad negativa");
+        }
+        if (estado() < cantidad) {
+            throw new Exception("No se hay suficiente saldo");
+        }
+        saldo = saldo - cantidad;
+    }
+
+    /**
+     * Método operativa_Cuenta que realiza una retirada y un ingreso de las
+     * cantidades indicadas entre paréntesis. Tras el ingreso y retirada se
+     * imprime un mensaje por pantalla que indica si han sido realizados de
+     * forma correcta
+     *
+     * @param cantidad pide una cantidad numérica que será restada y sumada del
+     * atributo saldo de los objetos de la clase CCuenta que creemos
+     */
+    public void operativa_cuenta(float cantidad) {
+
+        try {
+            System.out.println("Retirada en cuenta");
+            retirar(cantidad);
+        } catch (Exception e) {
+            System.out.print("Fallo al retirar");
+        }
+        try {
+            System.out.println("Ingreso en cuenta \n");
+            ingresar(cantidad);
+        } catch (Exception e) {
+            System.out.print("Fallo al ingresar");
+        }
+    }
+
+}
